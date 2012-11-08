@@ -48,7 +48,7 @@
         
         
         float prob = [self pS] * [self pLSSum];
-        NSNumber *probability = [NSNumber numberWithDouble:prob];
+        NSNumber *probability = [NSNumber numberWithFloat:prob];
         [self.probabilities setObject:probability forKey:key];
     }
 }
