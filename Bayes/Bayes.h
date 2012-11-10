@@ -12,6 +12,7 @@
 
 /*
 trainFrequencies
+ Mutual for all classifiers
 
 Key   (Label)
 Value (NSCountedSet of frequency of features)
@@ -36,11 +37,17 @@ Value (NSCountedSet of frequency of features)
 @property (strong, nonatomic) NSString *currentLabel;
 
 -(void)train:(NSArray *)features forlabel: (NSString *)label;
--(void)test:(NSArray *)features;
+-(void)guessNaiveBayes:(NSArray *)features;
 
 
 -(int) oL;
--(int)oFL:(NSString *)feature;
+-(long)oFL:(NSString *)feature;
 -(float) pLSSum;
 -(float)pS;
+
+-(void)guessRobinson:(NSArray *)features;
+-(void) getFScores;
+-(int) getTotalCount;
+-(float) robinson;
+@property (strong, nonatomic) NSMutableArray *fScores;
 @end

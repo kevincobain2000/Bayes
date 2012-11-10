@@ -13,6 +13,7 @@
 @synthesize currentLabel;
 @synthesize allFrequencies;
 @synthesize probabilities;
+@synthesize fScores;
 - (id) init
 {
     self = [super init];
@@ -23,6 +24,8 @@
         self.allFrequencies = [[NSCountedSet alloc] init];
         self.probabilities = [[NSMutableDictionary alloc] init];
         self.currentLabel = [[NSString alloc] init];
+        
+        
         
     }
     
@@ -41,17 +44,90 @@
     }
     
 }
--(void)test:(NSArray *)features{
+
+#pragma mark Robinson
+-(void)guessRobinson:(NSArray *)features{
     self.testFrequencies = [[NSCountedSet alloc] initWithArray:features];
     for (NSString *key in [self.trainFrequencies allKeys]){
         self.currentLabel = key;
+        self.fScores = [[NSMutableArray alloc] init];
+        [self getFScores];
         
+        float prob = [self robinson];
+
+        NSNumber *probability = [NSNumber numberWithFloat:prob];
+        [self.probabilities setObject:probability forKey:key];
+    }
+}
+-(void) getFScores{
+    /*
+     Note These counts are modified and may not represent the same ways
+     the Maximum Likelihood is calculated.
+     */
+    long poolCount = [[self.trainFrequencies objectForKey:self.currentLabel] count]+1;
+    int totalCount = [self getTotalCount];
+    
+
+    long otherCount;
+    int thisCount;
+    int themCount;
+    
+    for (NSString *feature in self.testFrequencies){
+        otherCount = 1;
+        thisCount=1;
+        themCount=1;
+        for (NSString *key in self.trainFrequencies){
+            if ([key isNotEqualTo:self.currentLabel]){
+                themCount += [[self.trainFrequencies objectForKey:key] countForObject:feature];
+            }
+            else{
+                thisCount += [[self.trainFrequencies objectForKey:self.currentLabel] countForObject:feature];
+            }
+        }
+        otherCount = (float)totalCount/thisCount;
+        float goodMetric = (float)otherCount/(float)poolCount;
+        float badMetric = (float)thisCount/(float)themCount;
+        float f = (float)badMetric/((float)goodMetric +(float)badMetric);
+        NSNumber *FScore = [NSNumber numberWithFloat:f];
+        [self.fScores addObject:FScore];
+    }
+}
+
+-(int) getTotalCount{
+    long total = 1;
+    for (NSString *key in self.trainFrequencies){
+        total += [[self.trainFrequencies objectForKey:key] count];
+    }
+    return (int)total;
+}
+
+-(float) robinson{
+    int n = (int)[self.fScores count];
+    float P = 1;
+    float Q = 1;
+    float S = 1.0;
+    for (id p in self.fScores){
+        P *= (1-[p floatValue]);
+        Q *= [p floatValue];
+    }
+    P = 1-pow(P, n);
+    Q = 1 - pow(Q, (float)1/n);
+    S = (1+(P-Q)/(P+Q))/2;
+    return S;
+}
+
+#pragma mark Naive Bayes
+-(void)guessNaiveBayes:(NSArray *)features{
+    self.testFrequencies = [[NSCountedSet alloc] initWithArray:features];
+    for (NSString *key in [self.trainFrequencies allKeys]){
+        self.currentLabel = key;
         
         float prob = [self pS] * [self pLSSum];
         NSNumber *probability = [NSNumber numberWithFloat:prob];
         [self.probabilities setObject:probability forKey:key];
     }
 }
+
 
 -(int) oL{
     //Number of features in currentlabel
@@ -61,8 +137,8 @@
     }
     return i;
 }
--(int)oFL:(NSString *)feature{
-    int i = [[self.trainFrequencies objectForKey:self.currentLabel] countForObject:feature];
+-(long)oFL:(NSString *)feature{
+    long i = [[self.trainFrequencies objectForKey:self.currentLabel] countForObject:feature];
     return i;
 }
 -(float) pLSSum{
