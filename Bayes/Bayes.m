@@ -24,9 +24,6 @@
         self.allFrequencies = [[NSCountedSet alloc] init];
         self.probabilities = [[NSMutableDictionary alloc] init];
         self.currentLabel = [[NSString alloc] init];
-        
-        
-        
     }
     
     return self;

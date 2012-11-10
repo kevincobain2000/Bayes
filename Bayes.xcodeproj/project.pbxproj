@@ -11,6 +11,8 @@
 		AD4A88ED164BE00D00F8DC25 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A88EC164BE00D00F8DC25 /* main.m */; };
 		AD4A88F1164BE00D00F8DC25 /* Bayes.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = AD4A88F0164BE00D00F8DC25 /* Bayes.1 */; };
 		AD4A88F9164BE02000F8DC25 /* Bayes.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A88F8164BE02000F8DC25 /* Bayes.m */; };
+		AD9FAF81164E54090083AF1B /* TextProcessing.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9FAF80164E54090083AF1B /* TextProcessing.m */; };
+		AD9FAF86164E57980083AF1B /* StopWords.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9FAF85164E57980083AF1B /* StopWords.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -34,6 +36,10 @@
 		AD4A88F0164BE00D00F8DC25 /* Bayes.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = Bayes.1; sourceTree = "<group>"; };
 		AD4A88F7164BE02000F8DC25 /* Bayes.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bayes.h; sourceTree = "<group>"; };
 		AD4A88F8164BE02000F8DC25 /* Bayes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Bayes.m; sourceTree = "<group>"; };
+		AD9FAF7F164E54090083AF1B /* TextProcessing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextProcessing.h; sourceTree = "<group>"; };
+		AD9FAF80164E54090083AF1B /* TextProcessing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextProcessing.m; sourceTree = "<group>"; };
+		AD9FAF84164E57980083AF1B /* StopWords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopWords.h; sourceTree = "<group>"; };
+		AD9FAF85164E57980083AF1B /* StopWords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopWords.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +83,10 @@
 			isa = PBXGroup;
 			children = (
 				AD4A88EC164BE00D00F8DC25 /* main.m */,
+				AD9FAF84164E57980083AF1B /* StopWords.h */,
+				AD9FAF85164E57980083AF1B /* StopWords.m */,
+				AD9FAF7F164E54090083AF1B /* TextProcessing.h */,
+				AD9FAF80164E54090083AF1B /* TextProcessing.m */,
 				AD4A88F7164BE02000F8DC25 /* Bayes.h */,
 				AD4A88F8164BE02000F8DC25 /* Bayes.m */,
 				AD4A88F0164BE00D00F8DC25 /* Bayes.1 */,
@@ -146,6 +156,8 @@
 			files = (
 				AD4A88ED164BE00D00F8DC25 /* main.m in Sources */,
 				AD4A88F9164BE02000F8DC25 /* Bayes.m in Sources */,
+				AD9FAF81164E54090083AF1B /* TextProcessing.m in Sources */,
+				AD9FAF86164E57980083AF1B /* StopWords.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -8,11 +8,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "Bayes/Bayes.m"
-         timestampString = "374221543.457238"
+         timestampString = "374242490.408151"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "139"
-         endingLineNumber = "139"
+         startingLineNumber = "136"
+         endingLineNumber = "136"
          landmarkName = "-oL"
          landmarkType = "5">
       </FileBreakpoint>
