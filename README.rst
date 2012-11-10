@@ -1,6 +1,8 @@
 Bayes
 =====
 
+`Documentation and Usage <http://www.jaist.ac.jp/~s1010205/bayesObjectiveC/>`_
+
 Bayesian Classification in Objective-C
 
 ::
