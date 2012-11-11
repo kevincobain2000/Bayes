@@ -13,6 +13,7 @@
 		AD4A88F9164BE02000F8DC25 /* Bayes.m in Sources */ = {isa = PBXBuildFile; fileRef = AD4A88F8164BE02000F8DC25 /* Bayes.m */; };
 		AD9FAF81164E54090083AF1B /* TextProcessing.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9FAF80164E54090083AF1B /* TextProcessing.m */; };
 		AD9FAF86164E57980083AF1B /* StopWords.m in Sources */ = {isa = PBXBuildFile; fileRef = AD9FAF85164E57980083AF1B /* StopWords.m */; };
+		ADE042D1164F5F4A00E925F7 /* FeaturesVector.m in Sources */ = {isa = PBXBuildFile; fileRef = ADE042D0164F5F4A00E925F7 /* FeaturesVector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,6 +41,8 @@
 		AD9FAF80164E54090083AF1B /* TextProcessing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextProcessing.m; sourceTree = "<group>"; };
 		AD9FAF84164E57980083AF1B /* StopWords.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StopWords.h; sourceTree = "<group>"; };
 		AD9FAF85164E57980083AF1B /* StopWords.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StopWords.m; sourceTree = "<group>"; };
+		ADE042CF164F5F4A00E925F7 /* FeaturesVector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FeaturesVector.h; sourceTree = "<group>"; };
+		ADE042D0164F5F4A00E925F7 /* FeaturesVector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FeaturesVector.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				AD4A88EC164BE00D00F8DC25 /* main.m */,
+				ADE042CF164F5F4A00E925F7 /* FeaturesVector.h */,
+				ADE042D0164F5F4A00E925F7 /* FeaturesVector.m */,
 				AD9FAF84164E57980083AF1B /* StopWords.h */,
 				AD9FAF85164E57980083AF1B /* StopWords.m */,
 				AD9FAF7F164E54090083AF1B /* TextProcessing.h */,
@@ -158,6 +163,7 @@
 				AD4A88F9164BE02000F8DC25 /* Bayes.m in Sources */,
 				AD9FAF81164E54090083AF1B /* TextProcessing.m in Sources */,
 				AD9FAF86164E57980083AF1B /* StopWords.m in Sources */,
+				ADE042D1164F5F4A00E925F7 /* FeaturesVector.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

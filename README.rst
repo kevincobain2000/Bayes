@@ -9,25 +9,42 @@ Bayesian Classification in Objective-C
 
   #import <Foundation/Foundation.h>
   #import "Bayes.h"
+  #import "TextProcessing.h"
+  #import "FeaturesVector.h"
   int main(int argc, const char * argv[])
   {
 
-     @autoreleasepool {
-        NSArray *f1 = [[NSArray alloc] initWithObjects:@"Salmon",@"Tuna", @"Chicken", @"Buri",@"Buri",nil];
-        NSArray *f2 = [[NSArray alloc] initWithObjects:@"Chicken",@"Chicken", @"Salmon",@"Tuna", @"Tuna",nil];
-        
-        NSArray *testFeatures = [[NSArray alloc] initWithObjects:@"Tuna",nil];
-        Bayes *classifier = [[Bayes alloc] init];
-        
-        [classifier train:f1 forlabel:@"S1"];
-        [classifier train:f2 forlabel:@"S2"];
-        
-        [classifier guessNaiveBayes:testFeatures];
-        NSLog(@"%@", classifier.probabilities);
-        [classifier guessRobinson:testFeatures];
-        NSLog(@"%@", classifier.probabilities);
+      @autoreleasepool {
 
-    }
-    return 0;
+          NSString *positive = @"What a Great movie must watch it again";
+          NSString *negative = @"What a Bad movie must not watch it again";
+        
+          Bayes *classifier = [[Bayes alloc] init];
+          FeaturesVector *featuresVector = [[FeaturesVector alloc] init];
+          //NSArray *features = [[NSArray alloc] initWithObjects:@"bigrams", @"trigrams", @"tokens", @"pos", nil];
+          NSArray *features = [[NSArray alloc] initWithObjects:@"bigrams", @"tokens",nil];
+        
+        
+          [featuresVector appendFeatures:positive forFeatures:features];
+          NSLog(@"Positive features extracted");
+          [classifier train:featuresVector.features forlabel:@"positive"];
+          NSLog(@"Positive features trained");
 
+        
+          [featuresVector appendFeatures:negative forFeatures:features];
+          NSLog(@"Negative features extracted");
+          [classifier train:featuresVector.features forlabel:@"negative"];
+          NSLog(@"Negative features trainied");
+        
+          NSString *toGuess = @"Great must watch";
+          [featuresVector appendFeatures:toGuess forFeatures:features];
+          [classifier guessNaiveBayes:featuresVector.features];
+          NSLog(@"%@",classifier.probabilities);
+        
+          [classifier guessRobinson:featuresVector.features];
+          NSLog(@"%@",classifier.probabilities);
+
+      }
+      return 0;
   }
+

@@ -61,7 +61,7 @@
      Note These counts are modified and may not represent the same ways
      the Maximum Likelihood is calculated.
      */
-    long poolCount = [[self.trainFrequencies objectForKey:self.currentLabel] count]+1;
+    long poolCount = [[self.trainFrequencies objectForKey:self.currentLabel] count];
     int totalCount = [self getTotalCount];
     
 
@@ -70,7 +70,7 @@
     int themCount;
     
     for (NSString *feature in self.testFrequencies){
-        otherCount = 1;
+        otherCount = 0;
         thisCount=1;
         themCount=1;
         for (NSString *key in self.trainFrequencies){
@@ -85,13 +85,14 @@
         float goodMetric = (float)otherCount/(float)poolCount;
         float badMetric = (float)thisCount/(float)themCount;
         float f = (float)badMetric/((float)goodMetric +(float)badMetric);
+
         NSNumber *FScore = [NSNumber numberWithFloat:f];
         [self.fScores addObject:FScore];
     }
 }
 
 -(int) getTotalCount{
-    long total = 1;
+    long total = 0;
     for (NSString *key in self.trainFrequencies){
         total += [[self.trainFrequencies objectForKey:key] count];
     }
@@ -102,14 +103,15 @@
     int n = (int)[self.fScores count];
     float P = 1;
     float Q = 1;
-    float S = 1.0;
+    float S = 0.0;
     for (id p in self.fScores){
         P *= (1-[p floatValue]);
         Q *= [p floatValue];
     }
     P = 1-pow(P, n);
     Q = 1 - pow(Q, (float)1/n);
-    S = (1+(P-Q)/(P+Q))/2;
+    S = (P-Q)/(P+Q);
+    //S = (1+(P-Q)/(P+Q))/2;
     return S;
 }
 

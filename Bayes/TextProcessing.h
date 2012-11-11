@@ -14,4 +14,5 @@
 + (NSMutableArray *) trigrams: (NSString *) rawText;
 + (NSString *) removeStopwords:(NSString *) rawText;
 + (NSMutableArray *) posTagger:(NSString *) raw;
++(NSString *)removePunctuations:(NSString *)raw;
 @end

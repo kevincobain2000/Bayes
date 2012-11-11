@@ -36,18 +36,22 @@
 + (NSString *) removeStopwords:(NSString *) rawText{
     StopWords *stopwords = [[StopWords alloc] init];
     NSArray *listItems = [rawText componentsSeparatedByString:@" "];
-    NSString *output = [[NSMutableString alloc] initWithString:@""];
+    NSString *output = @"";
     for (NSString *word in listItems){
         if ([stopwords.stopwords objectForKey:word] == NULL){
             output = [output stringByAppendingString:word];
             output = [output stringByAppendingString:@" "];
         }
     }
-    //Strip output
-    [output stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    output = [TextProcessing strip:output];
     return output;
 }
 
++ (NSString *)strip: (NSString *)raw{
+    //Strip output leading and end whitespaces
+    NSString *output = [raw stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return output;
+}
 + (NSMutableArray *) posTagger:(NSString *) raw{
     NSMutableArray *tokenTagArrays = [[NSMutableArray alloc] init];
     NSLinguisticTaggerOptions options = NSLinguisticTaggerOmitWhitespace  |
@@ -64,5 +68,17 @@
         [tokenTagArrays addObject:subArray];
     }];
     return tokenTagArrays;
+}
+
++(NSString *)removePunctuations:(NSString *)raw{
+    NSArray * splitRaw = [raw componentsSeparatedByString:@" "];
+    NSString *output = @"";
+    for (NSString *word in splitRaw){
+        NSString* removedPunctuation = [[word componentsSeparatedByCharactersInSet:[[NSCharacterSet letterCharacterSet] invertedSet]] componentsJoinedByString:@""];
+        output = [output stringByAppendingString:removedPunctuation];
+        output = [output stringByAppendingString:@" "];
+    }
+    output = [TextProcessing strip:output];
+    return output;
 }
 @end
