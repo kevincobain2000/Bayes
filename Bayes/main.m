@@ -7,43 +7,35 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "Bayes.h"
-#import "TextProcessing.h"
-#import "FeaturesVector.h"
+#import "Api.h"
 int main(int argc, const char * argv[])
 {
 
     @autoreleasepool {
+        Api *myApi = [[Api alloc] init];
+        
+        //Classifiers
+        
+        //MaxentClassifier
 
-        NSString *positive = @"What a Great movie must watch it again";
-        NSString *negative = @"What a Bad movie must not watch it again";
+        [myApi sentiClassifier:@"This was one of the bad movies. Will Never watch it again" andClassifier:@"MaxentClassifier" andDomain:@"movies"];
+        NSLog(@"Maxent Classifier %@",myApi.jsonOutputDict);
         
-        Bayes *classifier = [[Bayes alloc] init];
-        FeaturesVector *featuresVector = [[FeaturesVector alloc] init];
-        //NSArray *features = [[NSArray alloc] initWithObjects:@"bigrams", @"trigrams", @"tokens", @"pos", nil];
-        NSArray *features = [[NSArray alloc] initWithObjects:@"bigrams", @"tokens",nil];
+        //NaiveBayes
+        [myApi sentiClassifier:@"This was one of the best movies. Will surely watch it again" andClassifier:@"NaiveBayes" andDomain:@"tweets"];
+        NSLog(@"Naive Bayes %@",myApi.jsonOutputDict);
         
+        //NaiveBayes
+        [myApi sentiClassifier:@"This was one of the best movies. Will surely watch it again" andClassifier:@"WSD-SentiWordNet" andDomain:@"movies"];
+        NSLog(@"WSD %@",myApi.jsonOutputDict);
         
-        [featuresVector appendFeatures:positive forFeatures:features];
-        NSLog(@"Positive features extracted");
-        [classifier train:featuresVector.features forlabel:@"positive"];
-        NSLog(@"Positive features trained");
+        //Domains
+        //movies, tweets, amazon
+
 
         
-        [featuresVector appendFeatures:negative forFeatures:features];
-        NSLog(@"Negative features extracted");
-        [classifier train:featuresVector.features forlabel:@"negative"];
-        NSLog(@"Negative features trainied");
-        
-        NSString *toGuess = @"Great must watch";
-        [featuresVector appendFeatures:toGuess forFeatures:features];
-        [classifier guessNaiveBayes:featuresVector.features];
-        NSLog(@"%@",classifier.probabilities);
-        
-        [classifier guessRobinson:featuresVector.features];
-        NSLog(@"%@",classifier.probabilities);
-
     }
     return 0;
 }
+
 

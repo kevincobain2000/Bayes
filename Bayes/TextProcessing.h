@@ -15,4 +15,5 @@
 + (NSString *) removeStopwords:(NSString *) rawText;
 + (NSMutableArray *) posTagger:(NSString *) raw;
 +(NSString *)removePunctuations:(NSString *)raw;
++ (float) getDiceScore: (NSString *) firstString andSecondString: (NSString *) secondString;
 @end

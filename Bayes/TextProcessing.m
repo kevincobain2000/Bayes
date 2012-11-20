@@ -10,6 +10,8 @@
 #import "StopWords.h"
 @implementation TextProcessing
 
+#pragma mark Features
+
 + (NSMutableArray *) bigrams: (NSString *) rawText{
     NSArray *listItems = [rawText componentsSeparatedByString:@" "];
     NSMutableArray *bigrams = [[NSMutableArray alloc] init];
@@ -33,25 +35,6 @@
     return trigrams;
 }
 
-+ (NSString *) removeStopwords:(NSString *) rawText{
-    StopWords *stopwords = [[StopWords alloc] init];
-    NSArray *listItems = [rawText componentsSeparatedByString:@" "];
-    NSString *output = @"";
-    for (NSString *word in listItems){
-        if ([stopwords.stopwords objectForKey:word] == NULL){
-            output = [output stringByAppendingString:word];
-            output = [output stringByAppendingString:@" "];
-        }
-    }
-    output = [TextProcessing strip:output];
-    return output;
-}
-
-+ (NSString *)strip: (NSString *)raw{
-    //Strip output leading and end whitespaces
-    NSString *output = [raw stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    return output;
-}
 + (NSMutableArray *) posTagger:(NSString *) raw{
     NSMutableArray *tokenTagArrays = [[NSMutableArray alloc] init];
     NSLinguisticTaggerOptions options = NSLinguisticTaggerOmitWhitespace  |
@@ -70,6 +53,22 @@
     return tokenTagArrays;
 }
 
+#pragma mark Text Processing
+
++ (NSString *) removeStopwords:(NSString *) rawText{
+    StopWords *stopwords = [[StopWords alloc] init];
+    NSArray *listItems = [rawText componentsSeparatedByString:@" "];
+    NSString *output = @"";
+    for (NSString *word in listItems){
+        if ([stopwords.stopwords objectForKey:word] == NULL){
+            output = [output stringByAppendingString:word];
+            output = [output stringByAppendingString:@" "];
+        }
+    }
+    output = [TextProcessing strip:output];
+    return output;
+}
+
 +(NSString *)removePunctuations:(NSString *)raw{
     NSArray * splitRaw = [raw componentsSeparatedByString:@" "];
     NSString *output = @"";
@@ -81,4 +80,24 @@
     output = [TextProcessing strip:output];
     return output;
 }
++ (NSString *)strip: (NSString *)raw{
+    //Strip output leading and end whitespaces
+    NSString *output = [raw stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    return output;
+}
+
+#pragma mark Sentence Similarity Function
+
++ (float) getDiceScore: (NSString *) firstString andSecondString: (NSString *) secondString{
+    NSArray *first = [firstString componentsSeparatedByString:@" " ];
+    NSArray *second = [secondString componentsSeparatedByString:@" " ];
+    
+    NSMutableSet *intersection = [NSMutableSet setWithArray:first];
+    [intersection intersectSet:[NSSet setWithArray:second]];
+    
+    float diceScore= 2* (float)[[intersection allObjects] count]/ (float)([first count]+[second count]);
+    return diceScore;
+}
+
+
 @end
