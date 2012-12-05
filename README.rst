@@ -1,7 +1,7 @@
 Bayes
 =====
 
-`Documentation and Usage <http://www.jaist.ac.jp/~s1010205/bayesObjectiveC/>`_
+`Documentation and Usage <http://www.jaist.ac.jp/~s1010205/bayesObjectiveC>`_
 
 About
 =====
