@@ -1,7 +1,5 @@
-Bayes
-=====
+## Bayes
 
-TODO: dig back the documentation. I am not a JAIST student anymore :( `Documentation and Usage <http://www.jaist.ac.jp/~s1010205/bayesObjectiveC>`_
 
 Usage:
 
@@ -31,8 +29,8 @@ int main(int argc, const char * argv[])
         //movies, tweets, amazon
 ```
 
-About
-=====
+### About
+
 
 1. Library includes standard naive bays, robinson's classifier.
 2. For sentiment analysis api is used for which json is used dependencies of which are included in the project.
